@@ -7,7 +7,6 @@
 
 #define MAX_PROCESSES 10
 
-// Struktur untuk menyimpan informasi proses
 typedef struct {
     int pid;
     char name[10];
@@ -18,7 +17,6 @@ typedef struct {
     int completed;
 } Process;
 
-// Variabel global
 Process processes[MAX_PROCESSES];
 int num_processes = 0;
 int slices = 0;
@@ -27,7 +25,6 @@ int current_time = 0;
 int slices_elapsed = 0;
 int all_completed = 0;
 
-// Deklarasi fungsi
 void timer_handler(int signum);
 void display_processes();
 void run_scheduler();
@@ -57,7 +54,7 @@ int main(){
         return 1;
     }
     
-    // Input burst time untuk setiap proses
+    // Input burst time & inisialisasi awal atribut untuk setiap proses
     printf("\n");
     for (int i = 0; i < num_processes; i++) {
         processes[i].pid = i + 1;
@@ -72,14 +69,12 @@ int main(){
         processes[i].completed = 0;
     }
     
-    // Tampilkan informasi proses
     display_processes();
     
     printf("Press Enter to start simulation...");
-    getchar(); // Clear input buffer
-    getchar(); // Wait for Enter
+    getchar();
+    getchar();
     
-    // Jalankan scheduler
     run_scheduler();
     
     return 0;
@@ -216,7 +211,6 @@ void run_scheduler() {
     printf("Time slices: %d\n", slices);
     printf("========================================\n\n");
     
-    // Mulai proses pertama
     current_process = 0;
     
     // Start timer
